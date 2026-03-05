@@ -15,7 +15,7 @@ This repository contains:
 - **Figure generation scripts** — Python scripts to reproduce the figures and tables in the paper:
   - `gen_e4_tables_hist.py` — Generates the E4 grouped bar chart (Table VII / VIII comparison).
   - `gen_injection_fig.py` — Generates the E3 injection curve figure.
-  - `make_injection_fig.py` / `make_injection_fig_v2.py` — Alternative injection figure variants with class-distribution plots.
+  - `make_injection_fig_v2.py` —  Injection figure with class-distribution plots.
 
 ## Requirements
 
