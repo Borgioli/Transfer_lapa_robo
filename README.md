@@ -50,6 +50,9 @@ These are entrypoints and config snapshots, not a standalone runnable package. T
 
 Large checkpoints were not duplicated into this folder.
 
+- Full experiment archive mirror:
+  - `https://uofi.app.box.com/folder/370269923491`
+  - The Box folder mirrors the local tree rooted at `./IROS_2026_output`.
 - Robotic pretraining checkpoint used for the robotic-only setup:
   - `path-to/best_ckpt_7_loss_0.1397.pth`
 - Classic SPR checkpoint used for the other experiments:
@@ -60,3 +63,57 @@ Large checkpoints were not duplicated into this folder.
   - `path-to/IROS_2026_output/enodivt/output_test_freeze_1`
   - `path-to/IROS_2026_output/sitl_cholec80_injection`
 
+### `./IROS_2026_output` structure
+
+- `./IROS_2026_output/enodivt/`
+  - Main SITL fine-tuning runs grouped by freeze setting.
+  - The three subfolders are:
+    - `output_test_freeze_-1/`
+    - `output_test_freeze_0/`
+    - `output_test_freeze_1/`
+  - Each of those contains multiple timestamped run folders, for example:
+    - `./IROS_2026_output/enodivt/output_test_freeze_-1/16_32-25.02.26_FeatureExtraction_sitl_phase/`
+  - Inside one run folder, the useful files are usually:
+    - `checkpoints/epoch=...-val_acc_phase=....ckpt`
+    - `checkpoints/phase_timeline.png`
+    - `tb/version_0/hparams.yaml`
+    - `tb/version_0/events.out.tfevents...`
+  - Many runs also contain `cholec80_pickle_export/`; in the current archive these directories appear to be present as placeholders and are typically empty.
+
+- `./IROS_2026_output/sitl_cholec80_injection/`
+  - E3 injection experiments grouped by laparoscopic injection ratio.
+  - The ratio folders are:
+    - `inject_0_0/`
+    - `inject_0_10/`
+    - `inject_0_25/`
+    - `inject_0_50/`
+    - `inject_0_65/`
+    - `inject_0_80/`
+    - `inject_1_0/`
+  - Each ratio folder contains several timestamped repeat runs, for example:
+    - `./IROS_2026_output/sitl_cholec80_injection/inject_0_25/06_02-23.02.26_FeatureExtraction_sitl_inject_0_25/`
+  - Inside each run folder, the useful files are usually:
+    - `checkpoints/epoch=...-val_acc_phase=....ckpt`
+    - `checkpoints/phase_timeline.png`
+    - `tb/version_0/hparams.yaml`
+    - `tb/version_0/events.out.tfevents...`
+  - `hparams.yaml` is the easiest place to inspect the exact arguments used for a particular run.
+
+- `./IROS_2026_output/<timestamp>_FeatureExtraction_sitl_phase/`
+  - In addition to the organized subtrees above, the archive root also contains a number of older direct run folders named like `08_39-17.02.26_FeatureExtraction_sitl_phase`.
+  - These have the same internal layout as a normal run folder:
+    - `checkpoints/`
+    - `tb/version_0/`
+    - sometimes `cholec80_pickle_export/`
+
+### How to navigate the Box mirror
+
+- Start at `IROS_2026_output/`.
+- For frozen or unfrozen SITL fine-tuning results, open `enodivt/` and then one of `output_test_freeze_-1/`, `output_test_freeze_0/`, or `output_test_freeze_1/`.
+- For injection ablations, open `sitl_cholec80_injection/`, then the desired `inject_*` ratio folder, then a timestamped run folder.
+- Within a run folder:
+  - the model weights are in `checkpoints/*.ckpt`
+  - the run config is in `tb/version_0/hparams.yaml`
+  - TensorBoard logs are in `tb/version_0/events.out.tfevents...`
+
+Both pretrained `.pth` files above are about 1.3 GB each, so they should be linked externally if you want them accessible in the shared reviewer repo.
