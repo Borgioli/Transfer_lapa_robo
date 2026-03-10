@@ -17,9 +17,7 @@ This repository contains:
   - `gen_e4_tables_hist.py` — Generates the E4 grouped bar chart (Table VII / VIII comparison).
   - `gen_injection_fig.py` — Generates the E3 injection curve figure.
   - `make_injection_fig.py` / `make_injection_fig_v2.py` — Alternative injection figure variants with class-distribution plots.
-- **Presentation generation scripts** — Export the summary deck in multiple formats:
-  - `generate_pdf_slides.py` — Generates the static PDF slide deck.
-  - `generate_ppt_slides.py` — Generates an editable `.pptx` deck with native PowerPoint text, tables, and charts.
+
 
 ## Requirements
 
