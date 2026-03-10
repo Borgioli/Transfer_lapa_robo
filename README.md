@@ -8,7 +8,7 @@ The purpose of this release is therefore not to present a novel backbone or trai
 
 | Resource | Location | Notes |
 | --- | --- | --- |
-| Box archive | `https://uofi.box.com/s/jbbomp8847ir6frw17ftw1fegjxyl20e` | Public share link for the full `IROS_2026_output` mirror |
+| Box archive | `[link](https://uofi.box.com/s/jbbomp8847ir6frw17ftw1fegjxyl20e)` | Public share link for the full `IROS_2026_output` mirror |
 | Robotic pretraining checkpoint | `path-to/best_ckpt_7_loss_0.1397.pth` | Robotic-only pretraining weights |
 | Classic SPR checkpoint | `path-to/endovit_SPR.pth` | Classic SPR weights used for the other experiments |
 | Fine-tuning outputs | `path-to/IROS_2026_output/` | Root of the archived fine-tuning runs |
