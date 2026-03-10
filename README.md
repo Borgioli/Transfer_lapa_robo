@@ -29,15 +29,6 @@ The files here are copies of the original entry scripts and config snapshots. Th
 | `endovit_vanilla/run_cholec80_sitl_injection_sweep.sh` | Injection sweep launcher | `E3` |
 | `endovit_vanilla/EndoViT/pretraining/pretrained_endovit_models/pretraining_config.yml` | Reference config for classic EndoViT SPR pretraining | `E4` |
 
-## Experiment Mapping
-
-| Experiment | Question | Main files |
-| --- | --- | --- |
-| `E1` | Cross-domain transfer between laparoscopic and robotic surgery | `endovit/.../train.py`, `endovit/.../test_only.py`, `endovit_vanilla/EndoViT/test_only_cholec80.py` |
-| `E2` | Frozen vs partially unfrozen vs full fine-tuning on SITL / OmniRAS-PR | `endovit/.../train.py`, `endovit/.../config_feature_extract_sitl.yml` |
-| `E3` | Laparoscopic data injection into robotic fine-tuning | `endovit_vanilla/run_cholec80_sitl_injection_sweep.sh`, `endovit_vanilla/EndoViT/.../train.py`, `endovit_vanilla/EndoViT/test_only_cholec80.py` |
-| `E4` | Robotic-only pretraining vs classic SPR pretraining | `endovit/pretraining/mae/main_pretrain.py`, `endovit_vanilla/EndoViT/pretraining/pretrained_endovit_models/pretraining_config.yml` |
-
 ## Checkpoints And Archive
 
 Large checkpoints were not duplicated into this folder.
@@ -66,11 +57,6 @@ Large checkpoints were not duplicated into this folder.
 | `sitl_cholec80_injection/inject_1_0/` | Injection runs at ratio `1.0` | Multiple timestamped repeats |
 | `<timestamp>_FeatureExtraction_sitl_phase/` | Older direct run folders stored at archive root | Same structure as a normal run folder |
 
-Example run paths:
-
-- `./IROS_2026_output/enodivt/output_test_freeze_-1/16_32-25.02.26_FeatureExtraction_sitl_phase/`
-- `./IROS_2026_output/sitl_cholec80_injection/inject_0_25/06_02-23.02.26_FeatureExtraction_sitl_inject_0_25/`
-
 ## Contents Of A Run Folder
 
 | Relative path inside one run folder | Meaning |
@@ -84,6 +70,6 @@ Example run paths:
 ## How To Browse The Box Mirror
 
 1. Open the Box share link and enter `IROS_2026_output/`.
-2. For freeze-setting SITL runs, go to `enodivt/` and then choose `output_test_freeze_-1/`, `output_test_freeze_0/`, or `output_test_freeze_1/`.
-3. For injection experiments, go to `sitl_cholec80_injection/`, then choose the desired `inject_*` ratio folder.
-4. Inside a timestamped run folder, use `checkpoints/*.ckpt` for weights and `tb/version_0/hparams.yaml` for the exact run configuration.
+2. For SITL fine-tuning runs, go to `enodivt/` and choose one of the `output_test_freeze_*` folders.
+3. For injection experiments, go to `sitl_cholec80_injection/` and choose the desired `inject_*` ratio folder.
+4. Inside a timestamped run folder, use `checkpoints/*.ckpt` for weights and `tb/version_0/hparams.yaml` for the exact configuration.
