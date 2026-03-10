@@ -1,0 +1,56 @@
+module : mae.feature_extraction.FeatureExtraction
+model : mae.TwoHeadMAEModel
+data_root : path-to/SITL_phases
+dataset : sitl_feature_extract_v3.SITLFeatureExtract
+out_features : 5
+input_height : 224
+input_width : 224
+batch_size : 256
+batch_size_test : 256  # Smaller batch size for testing to avoid partial video processing
+fps_sampling : 1
+fps_sampling_test : 1
+learning_rate : 0.00001
+dataset_mode : img_multilabel
+early_stopping_metric : val_acc_phase
+save_top_k : 1
+max_epochs : 15
+min_epochs : 1
+num_tasks : 1  # SITL doesn't have tool annotations, so just phase prediction
+num_sanity_val_steps : 4
+test_extract : False
+num_workers : 12
+gpus : 1
+
+# Focal Loss settings - more aggressive for class imbalance
+# gamma=3.0 focuses more on hard examples than gamma=2.0
+
+# label_smoothing=0.1 prevents overconfident predictions
+focal_gamma : 3.0
+label_smoothing : 0.05
+
+# wandb settings
+wandb_project_name : endovit_sitl
+wandb_name_suffix : sitl_phase
+wandb_tags :
+  - sitl
+  - phase_recognition
+  - endovit
+
+# MAE/EndoViT model settings
+mae_ckpt : path-to/endovit_SPR.pth
+mae_model : vit_base_patch16
+mae_layer_decay : 0.25
+mae_weight_decay : 0.05
+drop_path : 0.10
+# mae_reinit_n_layers : -1
+nb_classes : 2048
+freeze_weights : -1 #-1
+
+# output
+output_path : ./finetuning/surgical_phase_recognition/output_dir/sitl_training
+
+# seed for reproducibility
+seed : 42
+
+# loss balancing (set to false since we only have phase, no tools)
+loss_balancing : false
