@@ -48,11 +48,9 @@ These are entrypoints and config snapshots, not a standalone runnable package. T
 
 ## Checkpoint inventory
 
-Large checkpoints were not duplicated into this folder.
+Checkpoints can be found: https://uofi.box.com/s/jbbomp8847ir6frw17ftw1fegjxyl20e
 
-- Full experiment archive mirror:
-  - `https://uofi.app.box.com/folder/370269923491`
-  - The Box folder mirrors the local tree rooted at `./IROS_2026_output`.
+
 - Robotic pretraining checkpoint used for the robotic-only setup:
   - `path-to/best_ckpt_7_loss_0.1397.pth`
 - Classic SPR checkpoint used for the other experiments:
