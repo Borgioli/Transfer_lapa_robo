@@ -1,4 +1,4 @@
-# Reviewer Main Scripts
+# When Self-Supervision Transfers: Quantifying the Laparoscopic–Robotic Domain Shift
 
 This folder is a compact reviewer-facing snapshot of the main experiment entrypoints used for the IROS 2026 submission. Most of the underlying training pipeline, model structure, and evaluation logic are inherited from or closely inspired by prior EndoViT and Cholec80 codebases and benchmarks, rather than introduced here as a new architecture. In particular, this release builds on EndoViT, *EndoViT: pretraining vision transformers on a large collection of endoscopic images* (Batic et al., IJCARS 2024), and the Cholec80 benchmark release (CAMMA Research Group, *Cholec80 Dataset*).
 
