@@ -1,39 +1,63 @@
-# When Self-Supervision Transfers: Quantifying the Laparoscopic–Robotic Domain Shift
+# Reviewer Main Scripts
 
-This is the anonymized companion repository for the IROS 2026 submission *"When Self-Supervision Transfers: Quantifying the Laparoscopic–Robotic Domain Shift"*.
+This folder contains a curated copy of the main experiment entrypoints used while preparing the IROS 2026 submission. It is meant to help reviewers inspect the actual training and evaluation launch scripts without having to browse the full local `endovit/` and `endovit_vanilla/` trees.
 
-## Contents
+These are entrypoints and config snapshots, not a standalone runnable package. Their internal imports still refer to the original project structure.
 
-This repository contains:
+## Included scripts
 
-- **Trained models** — All model checkpoints used for evaluation in the paper (EndoViT backbone + SPR phase-classification head under frozen, partially unfrozen, and fully unfrozen regimes).
-- **Reviewer main scripts** — `reviewer_main_scripts/` contains a curated copy of the main pretraining, fine-tuning, evaluation, and sweep entrypoints pulled from the local `endovit/` and `endovit_vanilla/` codebases, plus a checkpoint inventory.
-- **Testing scripts** — Scripts to reproduce the four experiments reported in the paper:
-  - **E1** – Cross-domain evaluation (laparoscopic ↔ robotic transfer).
-  - **E2** – Frozen / partially unfrozen / fully unfrozen fine-tuning ablation.
-  - **E3** – Progressive laparoscopic data injection.
-  - **E4** – Robotic-only vs. mixed MAE pretraining comparison.
-- **Figure generation scripts** — Python scripts to reproduce the figures and tables in the paper:
-  - `gen_e4_tables_hist.py` — Generates the E4 grouped bar chart (Table VII / VIII comparison).
-  - `gen_injection_fig.py` — Generates the E3 injection curve figure.
-  - `make_injection_fig.py` / `make_injection_fig_v2.py` — Alternative injection figure variants with class-distribution plots.
+- `endovit/pretraining/mae/main_pretrain.py`
+  - Robotic MAE pretraining entrypoint used for the robotic-only pretraining setup.
+- `endovit/finetuning/surgical_phase_recognition/model/TeCNO/train.py`
+  - Modified SPR fine-tuning entrypoint used for the SITL / OmniRAS-PR experiments.
+- `endovit/finetuning/surgical_phase_recognition/model/TeCNO/test_only.py`
+  - Test-only evaluator for the robotic surgical-phase benchmark.
+- `endovit/finetuning/surgical_phase_recognition/model/TeCNO/test_only_cholec80.py`
+  - Cholec80-side evaluator from the modified pipeline.
+- `endovit/finetuning/surgical_phase_recognition/model/TeCNO/modules/mae/config/config_feature_extract_sitl.yml`
+  - Main SITL fine-tuning config snapshot.
+- `endovit/finetuning/surgical_phase_recognition/model/TeCNO/modules/mae/config/config_feature_extract_mae.yml`
+  - Cholec80 MAE fine-tuning config snapshot used in the modified tree.
+- `endovit_vanilla/EndoViT/finetuning/surgical_phase_recognition/model/TeCNO/train.py`
+  - Vanilla EndoViT SPR fine-tuning entrypoint used with the classic SPR checkpoint.
+- `endovit_vanilla/EndoViT/test_only_cholec80.py`
+  - Standalone Cholec80 test-only evaluator used for reviewer-facing evaluation.
+- `endovit_vanilla/EndoViT/finetuning/surgical_phase_recognition/model/TeCNO/modules/mae/config/config_feature_extract_mae.yml`
+  - Vanilla Cholec80 fine-tuning config snapshot.
+- `endovit_vanilla/run_cholec80_sitl_injection_sweep.sh`
+  - Sweep launcher for the Cholec80 plus SITL injection experiments.
+- `endovit_vanilla/EndoViT/pretraining/pretrained_endovit_models/pretraining_config.yml`
+  - Reference config for the classic EndoViT SPR pretraining setup.
 
+## Experiment mapping
 
-## Requirements
+- `E1` cross-domain transfer:
+  - `endovit/finetuning/.../train.py`
+  - `endovit/finetuning/.../test_only.py`
+  - `endovit_vanilla/EndoViT/test_only_cholec80.py`
+- `E2` frozen vs partially unfrozen vs full fine-tuning:
+  - `endovit/finetuning/.../train.py`
+  - `endovit/finetuning/.../config_feature_extract_sitl.yml`
+- `E3` laparoscopic data injection:
+  - `endovit_vanilla/run_cholec80_sitl_injection_sweep.sh`
+  - `endovit_vanilla/EndoViT/finetuning/.../train.py`
+  - `endovit_vanilla/EndoViT/test_only_cholec80.py`
+- `E4` robotic-only vs classic SPR pretraining:
+  - `endovit/pretraining/mae/main_pretrain.py`
+  - `endovit_vanilla/EndoViT/pretraining/pretrained_endovit_models/pretraining_config.yml`
 
-```
-numpy
-matplotlib
-```
+## Checkpoint inventory
 
-## Citation
+Large checkpoints were not duplicated into this folder.
 
-If you find this work useful, please cite:
+- Robotic pretraining checkpoint used for the robotic-only setup:
+  - `path-to/best_ckpt_7_loss_0.1397.pth`
+- Classic SPR checkpoint used for the other experiments:
+  - `path-to/endovit_SPR.pth`
+- Fine-tuned experiment outputs and checkpoints:
+  - `path-to/IROS_2026_output/enodivt/output_test_freeze_-1`
+  - `path-to/IROS_2026_output/enodivt/output_test_freeze_0`
+  - `path-to/IROS_2026_output/enodivt/output_test_freeze_1`
+  - `path-to/IROS_2026_output/sitl_cholec80_injection`
 
-```
-[Citation will be added upon acceptance]
-```
-
-## License
-
-This repository is provided for anonymous review purposes only.
+Both pretrained `.pth` files above are about 1.3 GB each, so they should be linked externally if you want them accessible in the shared reviewer repo.
