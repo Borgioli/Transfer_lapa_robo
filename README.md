@@ -1,6 +1,6 @@
 # Reviewer Main Scripts
 
-This folder is a compact reviewer-facing snapshot of the main experiment entrypoints used for the IROS 2026 submission. Most of the underlying training pipeline, model structure, and evaluation logic are inherited from or closely inspired by prior EndoViT and Cholec80 codebases and benchmarks, rather than introduced here as a new architecture.
+This folder is a compact reviewer-facing snapshot of the main experiment entrypoints used for the IROS 2026 submission. Most of the underlying training pipeline, model structure, and evaluation logic are inherited from or closely inspired by prior EndoViT and Cholec80 codebases and benchmarks, rather than introduced here as a new architecture. In particular, this release builds on EndoViT, *EndoViT: pretraining vision transformers on a large collection of endoscopic images* (Batic et al., IJCARS 2024), and the Cholec80 benchmark release (CAMMA Research Group, *Cholec80 Dataset*).
 
 The purpose of this release is therefore not to present a novel backbone or training framework, but to document the scripts used to study transferability between laparoscopic and robotic surgical domains. The files here are copies of the original entry scripts and config snapshots. They are not packaged as a standalone runnable project, and their imports still assume the original repository layout.
 
