@@ -60,4 +60,3 @@ Large checkpoints were not duplicated into this folder.
   - `path-to/IROS_2026_output/enodivt/output_test_freeze_1`
   - `path-to/IROS_2026_output/sitl_cholec80_injection`
 
-Both pretrained `.pth` files above are about 1.3 GB each, so they should be linked externally if you want them accessible in the shared reviewer repo.
