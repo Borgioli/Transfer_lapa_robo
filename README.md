@@ -1,8 +1,8 @@
 # Reviewer Main Scripts
 
-This folder is a compact reviewer-facing snapshot of the main experiment entrypoints used for the IROS 2026 submission. It is intended to make the relevant training, evaluation, and configuration files easy to inspect without browsing the full `endovit/` and `endovit_vanilla/` repositories.
+This folder is a compact reviewer-facing snapshot of the main experiment entrypoints used for the IROS 2026 submission. Most of the underlying training pipeline, model structure, and evaluation logic are inherited from or closely inspired by prior EndoViT and Cholec80 codebases and benchmarks, rather than introduced here as a new architecture.
 
-The files here are copies of the original entry scripts and config snapshots. They are not packaged as a standalone runnable project, and their imports still assume the original repository layout.
+The purpose of this release is therefore not to present a novel backbone or training framework, but to document the scripts used to study transferability between laparoscopic and robotic surgical domains. The files here are copies of the original entry scripts and config snapshots. They are not packaged as a standalone runnable project, and their imports still assume the original repository layout.
 
 ## Quick Access
 
